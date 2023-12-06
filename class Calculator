@@ -1,0 +1,58 @@
+import java.util.Scanner;
+public class Calculator {
+    // Абстрактный метод для  операции
+    abstract static class Operation {
+        public abstract double execute(double a, double b);
+    }
+
+    // Enum - в нем все возможные операции в калькуляторе :
+    // ADD == + ,
+    // Minus == - , Mnosh == * , DEL == /
+
+    enum Operator {
+        ADD {
+            public double executeOperation(double a, double b) {
+                return a + b;
+            }
+        },
+        Minus {
+            public double executeOperation(double a, double b) {
+                return a - b;
+            }
+        },
+        MUL {
+            public double executeOperation(double a, double b) {
+                return a * b;
+            }
+        },
+        DEL {
+            public double executeOperation(double a, double b) {
+                return a / b;
+            }
+        };
+
+        // Абстрактный метод для выполнения операции
+        public abstract double executeOperation(double a, double b);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите первое число: ");
+        double x = scanner.nextDouble();
+
+        System.out.print("Введите второе число: ");
+        double y = scanner.nextDouble();
+
+        System.out.print("Выберите операцию (+, -, *, /): ");
+        String operatorString = scanner.next();
+        Operator operator = Operator.valueOf(operatorString.toUpperCase());
+
+        // Выполнение выбранной операции
+        double result = operator.executeOperation(a, b);
+
+        System.out.println("Результат" + result);
+
+        scanner.close();
+    }
+}
